@@ -1,0 +1,9 @@
+DirectoryIndex home.php
+ErrorDocument 404 /404.html
+ErrorDocument 401 /401.html
+ErrorDocument 403 /403.html
+
+order allow,deny
+deny from 192.168.175.
+allow from all
+
