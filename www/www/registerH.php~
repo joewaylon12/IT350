@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 
 <!--
 My Third Page
@@ -35,28 +34,59 @@ My Third Page
 
 	<body>
 		<section>
-			<header>
-				<h1 id="header">Rent Your Dream Car!</h1>
-			</header>
+			<?php
+                include_once('nav.php');
+            ?>
+            <h2>Register For Newsletter</h2>
+            <form action="register.php" method="post">
+                <label>Name:</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Name" required=""/>
+                <label>Email:</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required=""/>
+                <br>
+                <button type="submit" class="btn btn-success" id="submit">REGISTER</button>
+            </form>
+            <br>
+            
+            <h2>Enter To Win A Free Rental!</h2>
+            <form action="elasticAdd.php" method="post">
+                <label>Name:</label>
+                <input type="text" name="nameM" id="nameM" class="form-control" placeholder="Name" required=""/>
+                <label>Email:</label>
+                <input type="email" name="emailM" id="emailM" class="form-control" placeholder="Email" required=""/>
+                <br>
+                <button type="submit" class="btn btn-success" id="submit">SUBMIT</button>
+            </form>
+            <br>
+            <h3>List Of Entered Users:</h3>
+            <?php
+            	$output = shell_exec('bash display.sh');
+					$someArray = json_decode($output,true);
+					$reduce = $someArray['hits']['hits'];
 
-			<nav class="navbar navbar-inverse">
-  			<div class="container-fluid">
-    			<div class="navbar-header">
-						<a class="navbar-brand" href="home.php">Waylon</a>
-    			</div>
-					<ul class="nav navbar-nav">
-                        <li id="home"><a href="home.php">Home <span class="glyphicon glyphicon-home"></span></a></li>
-						<li id="register"><a href="registerH.php">Register<span class="glyphicon glyphicon-user"></span></a></li>
-						<li id="contact"><a href="admin.php">Admin<span class="glyphicon glyphicon-user"></span></a></li>
-						<li id="contact"><a href="backup.php">Backup<span class="glyphicon glyphicon-archive"></span></a></li>
-					</ul>
-				</div>
-			</nav>
+					foreach($reduce as $key => $value){
+						echo $value['_source']['name'] . "<br>" . $value['_source']['email'] . "<br><br>";
+					}
+            
+            ?>
 
+
+			<footer>
+				<p>
+					Copyright © 2017 by Waylon Upshaw
+				</p>
+			</footer>
+		</section>
 			<script>
 				$(document).ready(function () {
 				$('.dropdown-toggle').dropdown();
 				});
 			</script>
+            <script>
+             $(document).ready(function () {
+                  $(".nav li").removeClass("active");
+                  $('#contact').addClass('active');
+            </script>
+        <script src="js/custom.js"></script>
 	</body>
 </html>

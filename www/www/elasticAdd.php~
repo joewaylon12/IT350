@@ -1,0 +1,18 @@
+<?php
+
+$name = "\"" . $_POST['nameM'] . "\"";
+$email = "\"" . $_POST['emailM'] . "\"";
+
+shell_exec('bash addVariables.sh ' . $name . " " . $email);
+
+$output = shell_exec('bash display.sh');
+$someArray = json_decode($output,true);
+//print_r($someArray);
+
+$reduce = $someArray['hits']['hits'];
+
+foreach($reduce as $key => $value){
+	echo $value['_source']['name'] . "<br>" . $value['_source']['email'] . "<br><br>";
+}
+
+?>
