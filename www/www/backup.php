@@ -53,6 +53,12 @@ if (!isset($_SESSION['var'])){
             <div>
             	<h3>SQL Database</h3>
             	<b>Running</b>
+            	<br>
+            	<?php
+            		$output = shell_exec('bash sqlCheck.sh');
+            		echo $output;
+            	
+            	?>
             
             	<br>
             	<h3>Mongo Database</h3>
